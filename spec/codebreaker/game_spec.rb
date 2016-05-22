@@ -51,7 +51,18 @@ module Codebreaker
       it "has to decrease move_number by 1" do
         expect{subject.guess_check "1234"}.to change{subject.instance_variable_get(:@move_number)}.by(-1)
       end
+    end
 
+    context "#hint" do
+      it "has to decrease @hint by 1" do
+        expect{subject.hint}.to change{subject.instance_variable_get(:@hint)}.by(-1)
+      end
+
+      it "has to return random number from secret code" do
+        subject.instance_variable_set(:@secret_code, "3456")
+        allow(subject).to receive(:rand).with(4).and_return(3)
+        expect(subject.hint).to eq("One of the numbers in the secret code is 6")
+      end
     end
   end
 end

@@ -1,7 +1,7 @@
 module Codebreaker
   class Game
     def initialize
-      @move_number = 12
+      @move_number = 9
       @secret_code = ""
       @hint = 1
     end
@@ -36,9 +36,16 @@ module Codebreaker
       end
 
       @move_number -= 1
-      return "You Have Won" if result == "++++"
+      return "You Have Won!" if result == "++++"
       return "Game Over" if @move_number <= 0
       result
+    end
+
+    def hint
+      return "You have used the hint already" if @hint == 0
+      @hint -= 1
+      x = rand(4)
+      "One of the numbers in the secret code is #{@secret_code[x]}"
     end
 
     private
