@@ -14,9 +14,11 @@ module Codebreaker
     end
 
     def create_scoring_chart
+      puts "%%%%%%%%%%%%%%%%%%%%% PLAYERS' SCORES %%%%%%%%%%%%%%%%%%%%%%%%%%%"
       @players.each do |x|
-        puts "Name: #{x.name} Moves: #{x.moves}"
+        puts "Name: #{x.name}           Moves: #{x.moves}"
       end
+      puts "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
     end
 
     def save_info

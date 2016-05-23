@@ -1,23 +1,27 @@
 module Codebreaker
   class Game
     attr_reader :move_number, :secret_code, :hints
+    N_HINT  = 1
+    N_MOVES = 12
 
     def initialize
       @secret_code = ""
+      @hints = N_HINT
+      @move_number = N_MOVES
     end
 
     def start
       @secret_code = generate_secret_code
-      @hints = 1
-      @move_number = 12
+      @hints = N_HINT
+      @move_number = N_MOVES
     end
 
     def victory
-      puts "You Win!"
+      puts "Congratulations!!! YOU WIN!"
     end
 
     def game_over
-      puts "Game Over! The secret code is #{@secret_code}"
+      puts "GAME OVER! You make me lough! The secret code is #{@secret_code}"
     end
 
     def guess_check(player_input)
@@ -49,6 +53,10 @@ module Codebreaker
       # return victory if result == "++++"
       # return game_over if @move_number < 0
       result
+    end
+
+    def moves
+      N_MOVES - @move_number
     end
 
     def hint

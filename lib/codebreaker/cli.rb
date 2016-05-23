@@ -11,9 +11,9 @@ module Codebreaker
     end
 
     def play
-      puts "Welcome to CodeBreaker Game! Ready to play?(y/n)"
+      puts "Welcome to CODEBREAKER GAME! Ready to play?(y/n)"
       result = gets.chomp
-      puts "'?' --to hint 'exit' --to quit"
+      puts "type: '?'--to get hint 'exit'--to Quit"
       case result
       when /y/
         @game.start
@@ -60,22 +60,21 @@ module Codebreaker
          puts "Please enter your name"
          name = gets.chomp
          @player.load_info
-         @player.add(User.new(name: name, moves: @game.move_number))
+         @player.add(User.new(name: name, moves: @game.moves))
          @player.save_info
+         @player.create_scoring_chart
         else
           puts "Bye-Bye!"
        end
     end
 
-    def replay_game
-      puts "Do you want to paly once again? (y/n)"
-      answer = gets.chomp
-      if answer == "y" ? play : save_score
-    end
-
+     def replay_game
+       puts "Do you want to play once again? (y/n)"
+       answer = gets.chomp
+       if answer == "y" ? play : save_score
+     end
     end
   end
-
   begin_play = Cli.new
   begin_play.play
 end
