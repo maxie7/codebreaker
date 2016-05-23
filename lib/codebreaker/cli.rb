@@ -4,7 +4,7 @@ require_relative "player"
 require_relative "user"
 
 module Codebreaker
-  class CodeBreaker
+  class Cli
     def initialize
       @game = Game.new
       @player = Player.new
@@ -63,7 +63,7 @@ module Codebreaker
          @player.add(User.new(name: name, moves: @game.move_number))
          @player.save_info
         else
-          puts "Bye-Bye"
+          puts "Bye-Bye!"
        end
     end
 
@@ -76,6 +76,6 @@ module Codebreaker
     end
   end
 
-  play = CodeBreaker.new
-  play.play
+  begin_play = Cli.new
+  begin_play.play
 end

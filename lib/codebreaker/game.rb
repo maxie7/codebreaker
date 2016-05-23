@@ -3,13 +3,13 @@ module Codebreaker
     attr_reader :move_number, :secret_code, :hints
 
     def initialize
-      @move_number = 20
       @secret_code = ""
-      @hints = 1
     end
 
     def start
       @secret_code = generate_secret_code
+      @hints = 1
+      @move_number = 12
     end
 
     def victory
@@ -61,8 +61,9 @@ module Codebreaker
     private
 
     def generate_secret_code
-      4.times{ @secret_code += "#{rand(1..6)}" }
-      @secret_code
+      (1..4).map{rand(1..6)}.join
+      # 4.times{ secret_code += "#{rand(1..6)}" }
+      # secret_code
     end
   end
 end
