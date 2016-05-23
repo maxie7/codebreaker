@@ -1,0 +1,13 @@
+---
+- !ruby/object:Codebreaker::User
+  name: Messi
+  moves: 8
+- !ruby/object:Codebreaker::User
+  name: Maxie
+  moves: 9
+- !ruby/object:Codebreaker::User
+  name: Pushkin
+  moves: 10
+- !ruby/object:Codebreaker::User
+  name: MaxMax
+  moves: 14

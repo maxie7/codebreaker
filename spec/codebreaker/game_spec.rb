@@ -33,7 +33,7 @@ module Codebreaker
       end
 
       it "has to return error message if it isn't a number" do
-        expect(subject.guess_check "qwer").to eq("not a number")
+        expect(subject.guess_check "qwer").to eq("number failed")
       end
 
       it "has to return error message if size not equal 4" do
@@ -54,8 +54,8 @@ module Codebreaker
     end
 
     context "#hint" do
-      it "has to decrease @hint by 1" do
-        expect{subject.hint}.to change{subject.instance_variable_get(:@hint)}.by(-1)
+      it "has to decrease @hints by 1" do
+        expect{subject.hint}.to change{subject.instance_variable_get(:@hints)}.by(-1)
       end
 
       it "has to return random number from secret code" do

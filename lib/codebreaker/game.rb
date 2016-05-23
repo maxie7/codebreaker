@@ -1,13 +1,23 @@
 module Codebreaker
   class Game
+    attr_reader :move_number, :secret_code, :hints
+
     def initialize
-      @move_number = 9
+      @move_number = 20
       @secret_code = ""
-      @hint = 1
+      @hints = 1
     end
 
     def start
       @secret_code = generate_secret_code
+    end
+
+    def victory
+      puts "You Win!"
+    end
+
+    def game_over
+      puts "Game Over! The secret code is #{@secret_code}"
     end
 
     def guess_check(player_input)
@@ -15,7 +25,7 @@ module Codebreaker
       code_not_eq  = ""
       result       = ""
 
-      return "not a number" unless player_input.match(/^[1-6]{1,4}/)
+      return "number failed" unless player_input.match(/^[1-6]{4}/)
       return "the number must have 4 digits" if player_input.size != 4
 
       for x in 0..3
@@ -36,14 +46,14 @@ module Codebreaker
       end
 
       @move_number -= 1
-      return "You Have Won!" if result == "++++"
-      return "Game Over" if @move_number <= 0
+      # return victory if result == "++++"
+      # return game_over if @move_number < 0
       result
     end
 
     def hint
-      return "You have used the hint already" if @hint == 0
-      @hint -= 1
+      return "You have used the hint already" if @hints == 0
+      @hints -= 1
       x = rand(4)
       "One of the numbers in the secret code is #{@secret_code[x]}"
     end
