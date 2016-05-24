@@ -32,7 +32,7 @@ module Codebreaker
       return "number failed" unless player_input.match(/^[1-6]{4}/)
       return "the number must have 4 digits" if player_input.size != 4
 
-      for x in 0..3
+      4.times do |x|
         if player_input[x] == @secret_code[x]
           result << "+"
         else
@@ -50,8 +50,6 @@ module Codebreaker
       end
 
       @move_number -= 1
-      # return victory if result == "++++"
-      # return game_over if @move_number < 0
       result
     end
 
@@ -70,8 +68,6 @@ module Codebreaker
 
     def generate_secret_code
       (1..4).map{rand(1..6)}.join
-      # 4.times{ secret_code += "#{rand(1..6)}" }
-      # secret_code
     end
   end
 end

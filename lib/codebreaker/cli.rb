@@ -10,71 +10,65 @@ module Codebreaker
       @player = Player.new
     end
 
-    def play
-      puts "Welcome to CODEBREAKER GAME! Ready to play?(y/n)"
-      result = gets.chomp
+    def welcome_info
+      puts "Welcome to CODEBREAKER GAME!"
       puts "type: '?'--to get hint 'exit'--to Quit"
-      case result
-      when /y/
-        @game.start
-        trigger = true
-        while trigger
-          puts "Enter 4-digit number:"
-          answer = gets.chomp
+    end
 
-          case answer
-          when "?"
-            puts @game.hint
-          when /exit/
+    def play
+      welcome_info
+      @game.start
+      trigger = true
+      while trigger
+        puts "Enter 4-digit number:"
+        answer = gets.chomp
+        case answer
+        when "?"    then puts @game.hint
+        when "exit" then trigger = false
+        else
+          if @game.move_number == 1
+            puts @game.game_over
+            replay_game
             trigger = false
           else
-            if @game.move_number == 0
-              puts @game.game_over
-              replay_game
-              trigger = false
-            else
-               reply = @game.guess_check(answer)
-               puts reply
-                 # ------------------------------------------------------
-                 if reply == "++++"
-                   puts @game.victory
-                   replay_game
-                   trigger = false
-                 end
-                 # --------------------------------------------------------
-            end
+            puts reply = @game.guess_check(answer)
+            check_victory(reply)
           end
         end
+      end
+    end
 
-      when /n/
-        puts "Ok! Bye-Bye!"
-      else
-        puts "Unexpected error!"
+    def check_victory(str_)
+      if str_ == "++++"
+        puts @game.victory
+        replay_game
       end
     end
 
     def save_score
-      puts "Do you want to save your score?(y/n)"
-      case gets.chomp
-       when /y/
-         puts "Please enter your name"
-         name = gets.chomp
-         @player.load_info
-         @player.add(User.new(name: name, moves: @game.moves))
-         @player.save_info
-         @player.create_scoring_chart
-        else
-          puts "Bye-Bye!"
-       end
+      puts "Wanna save your score?(press 'y' if yes)"
+      if gets.chomp == 'y'
+        puts "Please enter your name"
+        name = gets.chomp
+        @player.load_info
+        @player.add(User.new(name: name, moves: @game.moves))
+        @player.save_info
+        @player.create_scoring_chart
+        puts "Thanks for playing, #{name}!"
+      else
+        puts "Bye-Bye!"
+      end
+      exit
     end
 
-     def replay_game
-       puts "Do you want to play once again? (y/n)"
-       answer = gets.chomp
-       if answer == "y" ? play : save_score
-     end
+    def replay_game
+      puts "Do you want to play once again? (press 'y' if yes)"
+      answer = gets.chomp
+      if answer == 'y' ? play : save_score
     end
+   end
   end
+  
   begin_play = Cli.new
   begin_play.play
 end

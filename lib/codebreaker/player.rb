@@ -34,10 +34,9 @@ module Codebreaker
 
       info = File.read(FILE)
       new_player = YAML::load(info)
-      unless new_player.nil?
-        new_player.each do |x|
-          @players.push User.new(name: x.name, moves: x.moves)
-        end
+      return if new_player.nil?
+      new_player.each do |x|
+        @players.push User.new(name: x.name, moves: x.moves)
       end
     end
 
