@@ -4,6 +4,6 @@ require_relative "codebreaker/player"
 require_relative "codebreaker/user"
 require_relative "codebreaker/cli"
 
-module CodeBreaker
+module Codebreaker
 
 end

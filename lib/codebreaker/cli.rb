@@ -68,7 +68,7 @@ module Codebreaker
     end
    end
   end
-  
+
   begin_play = Cli.new
   begin_play.play
 end
