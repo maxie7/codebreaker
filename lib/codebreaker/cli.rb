@@ -63,10 +63,8 @@ module Codebreaker
 
     def replay_game
       puts "Do you want to play once again? (press 'y' if yes)"
-      answer = gets.chomp
-      if answer == 'y' ? play : save_score
+      gets.chomp == 'y' ? play : save_score
     end
-   end
   end
 
   begin_play = Cli.new

@@ -2,8 +2,9 @@ require 'spec_helper'
 
 module Codebreaker
   RSpec.describe Game do
+    subject(:game) {described_class.new}
+
     context "#start" do
-      let(:game) { Game.new }
       before do
         game.start
       end
@@ -27,7 +28,7 @@ module Codebreaker
       end
     end
 
-    context "#guess_number_validation" do
+    context "#guess_validation" do
       before do
         subject.instance_variable_set :@secret_code, "1234"
       end
@@ -44,56 +45,23 @@ module Codebreaker
         expect{subject.guess_check "1234"}.to change{subject.instance_variable_get(:@move_number)}.by(-1)
       end
 
-      it "returns '+' when an exact match" do
-        expect(subject.guess_check "1555").to eq("+")
-      end
-
-      it "returns '-' when a number match" do
-        expect(subject.guess_check "2555").to eq("-")
-      end
-
-      it "returns '--' when 2 number match" do
-        expect(subject.guess_check "2155").to eq("--")
-      end
-
-      it "returns '---' when 3 number match" do
-        expect(subject.guess_check "2145").to eq("---")
-      end
-
-      it "returns '----' when 4 number match" do
-        expect(subject.guess_check "2143").to eq("----")
-      end
-
-      it "returns '++' when 2 exact match" do
-        expect(subject.guess_check "1255").to eq("++")
-      end
-
-      it "returns '+++' when 3 exact match" do
-        expect(subject.guess_check "1235").to eq("+++")
-      end
-
       it "returns '++++' when 4(winner) exact match" do
         expect(subject.guess_check "1234").to eq("++++")
       end
+    end
 
-      it "returns '+-' when 1 exact & 1 number match" do
-        expect(subject.guess_check "1553").to eq("+-")
+    context '#guess_check' do
+      before do
+        subject.instance_variable_set :@secret_code, "1234"
       end
 
-      it "returns '+--' when 1 exact & 2 number match" do
-        expect(subject.guess_check "1325").to eq("+--")
-      end
-
-      it "returns '+---' when 1 exact & 3 number match" do
-        expect(subject.guess_check "1342").to eq("+---")
-      end
-
-      it "returns '++-' when 2 exact & 1 number match" do
-        expect(subject.guess_check "1245").to eq("++-")
-      end
-
-      it "returns '++--' when 2 exact & 2 number match" do
-        expect(subject.guess_check "1243").to eq("++--")
+      guess_and_result = [%w(1555 +),   %w(2555 -),  %w(2155 --),  %w(2145 ---),
+                          %w(2143 ----),%w(1255 ++), %w(1235 +++), %w(1234 ++++),
+                          %w(1553 +-),  %w(1325 +--),%w(1342 +---),%w(1245 ++-), %w(1243 ++--)]
+      guess_and_result.each do |element|
+        it "guess #{element[0]} should return #{element[1]}" do
+          expect(subject.send(:guess_check, element[0])).to eq element[1]
+        end
       end
     end
 
