@@ -31,6 +31,7 @@ module Codebreaker
             replay_game
             trigger = false
           else
+            check_victory(answer)
             puts reply = @game.guess_check(answer)
             check_victory(reply)
           end
@@ -39,10 +40,9 @@ module Codebreaker
     end
 
     def check_victory(str_)
-      if str_ == "++++"
-        puts @game.victory
-        replay_game
-      end
+      return unless str_ == "++++"
+      puts @game.victory
+      replay_game
     end
 
     def save_score

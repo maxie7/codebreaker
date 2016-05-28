@@ -25,10 +25,11 @@ module Codebreaker
     end
 
     def guess_check(player_input)
-      result = ""
       return "number failed" unless player_input.match(/^[1-6]{4}/)
       return "the number must have 4 digits" if player_input.size != 4
+      
       @move_number -= 1
+      result = ""
 
       exact_match = @secret_code.chars.zip(player_input.chars).keep_if{|x| x.uniq.size == 1}.count
       total_match = player_input.chars.uniq.inject(0){|num, x| num += [player_input.count(x), @secret_code.count(x)].min}
