@@ -21,13 +21,13 @@ module Codebreaker
     end
 
     def game_over
-      puts "GAME OVER! You make me lough! The secret code is #{@secret_code}"
+      puts "GAME OVER! You make me laugh! The secret code is #{@secret_code}"
     end
 
     def guess_check(player_input)
       return "number failed" unless player_input.match(/^[1-6]{4}/)
       return "the number must have 4 digits" if player_input.size != 4
-      
+
       @move_number -= 1
       result = ""
 

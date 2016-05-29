@@ -31,15 +31,15 @@ module Codebreaker
             replay_game
             trigger = false
           else
-            check_victory(answer)
+            victory_("++++") if answer == @game.secret_code
             puts reply = @game.guess_check(answer)
-            check_victory(reply)
+            victory_(reply)
           end
         end
       end
     end
 
-    def check_victory(str_)
+    def victory_(str_)
       return unless str_ == "++++"
       puts @game.victory
       replay_game
