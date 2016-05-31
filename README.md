@@ -1,6 +1,6 @@
 ## Codebreaker
 
-1) Just enter the 'lib' dir and type 'ruby codebreaker.rb'
+1) To run type 'ruby bin/console' from '/' directory
 2) To run the tests type 'rspec spec/codebreaker/game_spec.rb' or 'rspec spec/codebreaker/player_spec.rb'
 
 ## Installation

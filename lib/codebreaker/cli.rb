@@ -66,6 +66,4 @@ module Codebreaker
       gets.chomp == 'y' ? play : save_score
     end
   end
-
-  Cli.new.play
 end
