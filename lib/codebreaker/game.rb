@@ -31,8 +31,9 @@ module Codebreaker
       @move_number -= 1
       result = ""
 
-      exact_match = @secret_code.chars.zip(player_input.chars).keep_if{|x| x.uniq.size == 1}.count
-      total_match = player_input.chars.uniq.inject(0){|num, x| num += [player_input.count(x), @secret_code.count(x)].min}
+      p_input = player_input.chars
+      exact_match = @secret_code.chars.zip(p_input).keep_if{|x| x.uniq.size == 1}.count
+      total_match = p_input.uniq.inject(0){|num, x| num += [player_input.count(x), @secret_code.count(x)].min}
       number_match = total_match - exact_match
       result = total_match == 0 ? "" : ("+" *exact_match) + ("-" *number_match)
 
